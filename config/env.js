@@ -91,6 +91,10 @@ function getClientEnvironment(publicUrl) {
   const stringified = {
     'process.env': Object.keys(raw).reduce(
       (env, key) => {
+        if (key === 'PUBLIC_URL') {
+          env[key] = 'window.STATIC_URL'
+          return env;
+        }
         env[key] = JSON.stringify(raw[key]);
         return env;
       },
